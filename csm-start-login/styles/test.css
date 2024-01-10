@@ -1,0 +1,29 @@
+body {
+    background-image: url('photo1.jpg') !important;
+    background-repeat: no-repeat; 
+    background-position: center;
+    position: relative;
+    /* Weitere Hintergrund-Eigenschaften hier */
+    /* opacity: 0.8; */
+    background-size: 100% !important; */
+    /* width:100%;
+    height: 100% */
+    
+    /* Grundstil für den Button */
+        .btn-success {
+        background-color: #0b4788;
+        /* Beispiel-Farbe (blau) für den Absenden-Button */
+        color: #ffffff;
+        /* Textfarbe des Buttons */
+        /* Weitere Anpassungen für den Button-Stil hier */
+        }
+
+    .bg-body-tertiary {
+            background-color: rgb(184, 180, 180); /* Ändere die Farbe hier nach deinen Wünschen */
+            /* Weitere Stilanpassungen für die Navbar hier */
+        }
+ .dropdown-menu {
+            background-color: lightgray;;
+        }
+}
+

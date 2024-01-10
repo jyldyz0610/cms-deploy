@@ -1,0 +1,3 @@
+DROP USER IF EXISTS 'kbuser'@'localhost';
+FLUSH PRIVILEGES;
+DROP DATABASE IF EXISTS dev_kbzh;

@@ -1,0 +1,100 @@
+body {
+  background-image: url('img4.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.8;
+  background-size: cover;
+  width: 100%;
+  height: 98vh;
+}
+    
+    /* Grundstil für den Button */
+        .btn-success {
+        background-color: #134b88;
+        /* Beispiel-Farbe (blau) für den Absenden-Button */
+        color: #ffffff;
+        /* Textfarbe des Buttons */
+        /* Weitere Anpassungen für den Button-Stil hier */
+    }
+
+    /* Hover-Stil für den Button */
+    .btn-success:hover {
+        background-color: #060d14;
+        /* Dunklere Nuance der Hauptfarbe für den Hover-Zustand */
+        /* Weitere Anpassungen für den Hover-Stil hier */
+    }
+
+    /* Aktiver Zustand des Buttons */
+    .btn-success:active {
+        background-color: #5a8000;
+        /* Noch dunklere Nuance der Hauptfarbe für den aktiven Zustand */
+        /* Weitere Anpassungen für den aktiven Zustand hier */
+    }
+
+    .title {
+      color: red;
+  }
+  /* Stil für den Edit-Button */
+.edit-button {
+  color: rgb(90, 92, 90);
+  font-size: 13px /* Ändere diese Farbe nach deinen Wünschen */
+}
+
+/* Stil für den Löschen-Button */
+.delete-button {
+  color: rgb(126, 90, 90); /* Ändere diese Farbe nach deinen Wünschen */
+  font-size: 13px
+}
+
+  
+        
+
+.thumbnail-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .thumbnail-popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+  }
+
+  .thumbnail-container:hover .thumbnail-popup {
+    display: block;
+  }
+
+  /* Add this CSS to your stylesheet or in a style tag in your HTML head */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 1px solid #888;
+  padding: 20px;
+  z-index: 1;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#link-table.table.table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.8); 
+}

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Diesen git hook in .git/hooks verschieben
+# Check if package.json has been updated
+PACKAGE_JSON_UPDATED=$(git diff HEAD@{1} HEAD --name-only | grep 'package.json')
+
+if [ ! -z "$PACKAGE_JSON_UPDATED" ]; then
+	    echo -e "\033[1;31mpackage.json has been updated. Please remember to run 'npm install' again.\033[0m"
+fi
+

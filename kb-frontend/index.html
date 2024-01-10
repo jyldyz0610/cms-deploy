@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>knowledge Collection</title>
+  <link rel="icon" href="icon.jpg" type="image/jpeg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body class="container bs-light" style="margin-top: 100px; margin-center: 0px;">
+  <script id="link-item-template" type="text/x-handlebars-template">
+        <tr>    
+            <th scope="row">{{index}}</th>                
+
+            <td><a href="{{link}}" target="_blank">{{link}}</a>
+
+              <td>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Thumbnail" onclick="displayThumbnailModal('{{thumbnail}}')">
+                    <img src="{{thumbnail}}" alt="Thumbnail" class="thumbnail-img">
+                </a>                
+
+             </td>   
+            </td>
+            <td>{{category}}</td>
+            <td>
+              <a class="edit-button fas fa-edit" onclick="editLink('{{id}}')" style="cursor: pointer;"></a>
+              <a class="delete-button fas fa-edit fa-trash-alt" onclick="deleteLink('{{id}}')" style="cursor: pointer;"></a>
+            </td>
+          </tr>
+    </script>
+  <div class="modal" tabindex="-1" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form">
+            <input type="text" name="item" id="item">
+            <input type="text" name="thumbnail" id="thumbnail" placeholder="Thumbnail url">
+            <!-- <input type="file" name="thumbnail-file" id="thumbnail-file"> -->
+          </form>
+
+
+
+          <form action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="thumbnail" required>
+            <button type="submit">Upload</button>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button id="dialog-close" class="btn btn-danger">schliessen</button>
+          <button id="dialog-save" class="btn btn-success">speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-start bg-white card rounded-5 mx-auto my-3 p-3" style="width: 65%; background-color: rgba(122, 177, 187, 4.8) !important;">
+   
+    <h1 class="text-center" style="color: #fcf806f3; text-shadow: 2px 2px 2px black;">knowledge Collection <sup>App</sup></h1>
+
+    <p style="font-size: 29px; color:rgb(6, 0, 12); text-shadow:1px 1px 1px black; text-align: center;">*the best first App of the world*</p>
+
+
+          <!-- <select id="category-dropdown">
+       
+      </select> -->
+    <!-- </div> -->
+    <div class="d-flex align-items-center mb-3">
+
+    <input type="text" id="link-item" placeholder="Enter new link Item" class="form-control me-2">
+
+    <!-- <label for="categorySelect">Kategorie auswählen:</label> -->
+
+      <select id="categorySelect" class="selectpicker form-select me-2" data-live-search="true">
+          <option data-tokens="all">Kategorie auswählen:</option>
+          <option data-tokens="standard">Standard</option>
+          <option data-tokens="webdesign">Python</option>
+          <option data-tokens="development">Javascript</option>
+          <option data-tokens="development">Node-js</option>
+          <option data-tokens="cloud">AWS</option>
+          <option data-tokens="cloud">Automation</option>
+        <!-- Weitere Kategorien hier hinzufügen -->
+      </select>
+<button onclick="sendLink();" class="btn btn-secondary">Absenden</button>
+    </div>
+    
+
+    <div id="link-container" class="container">
+      <table class="table table-hover" id="link-table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Links</th>
+            <th scope="col">Thumbnail</th>
+            <th scope="col">Category</th>
+          </tr>
+        </thead>
+        <tbody id="link-tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- <form action="/link" method="post" enctype="multipart/form-data">
+    <label for="link">Link:</label>
+    <input type="text" name="link" required>
+
+    <label for="category">Category:</label>
+    <input type="text" name="category" required>
+
+    <label for="thumbnail">Custom Thumbnail:</label>
+    <input type="file" name="thumbnail" accept="image/*">
+
+    <button type="submit">Submit</button>
+</form> -->
+
+<!-- Modal -->
+<div class="modal fade" id="thumbnailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Thumbnail Preview</h5>
+              <!-- // hat ein id hingeführt damit wir unser fernster abschliesen -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="thumbnailModalClose">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <img id="thumbnailImage" src="" alt="Thumbnail Preview" style="width: 100%;">
+          </div>
+      </div>
+  </div>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+<div id="customPopup" class="popup">
+  <div class="popup-content">
+      <span class="close-popup" onclick="closeCustomPopup()">&times;</span>
+      <p id="customPopupMessage"></p>
+  </div>
+</div>
+<footer class="navbar navbar-expand-lg bg-secondary fixed-bottom" style="height: 60px;">
+  <div class="container-fluid">
+      <ul class="navbar-nav mb-lg-0 mx-auto">
+          <h6><font font style="color: #fcf806f3">Knowledge<sup>App</sup></font></h6>
+          <li class="nav-item px-2"><a href="../csm-start-login/start.html" target="_self" class="nav-link">Home</a>
+          <li class="nav-item px-2"><a href="/datenschutz" target="_self" class="nav-link">Datenschutz</a></li>
+          <li class="nav-item px-2"><a href="/contact" target="_self" class="nav-link">Kontakt</a></li>
+          <li class="nav-item px-2"><a href="/impressum" target="_self" class="nav-link">Impressum</a></li>
+          </li>
+      </ul>
+  </div>
+</footer>
+
+</body>
+
+</html>
