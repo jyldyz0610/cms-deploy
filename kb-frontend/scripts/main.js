@@ -1,8 +1,9 @@
 console.log("link Script läuft");
-const apiUrl = "http://localhost:3000/";
+//const apiUrl = "http://localhost:3000/";
 // const apiUrl = "http://apigateway.awslambda.amazonaws.com/";
-const apiUrl = "http://cmsdevop.s3-website.eu-central-1.amazonaws.com";
+//const apiUrl = "http://cmsdevop.s3-website.eu-central-1.amazonaws.com";
 
+const apiUrl = "http://ec2-3-73-101-105.eu-central-1.compute.amazonaws.com:3000/";
 const container = document.getElementById('link-container');
 const tbody = document.getElementById('link-tbody');
 let list;

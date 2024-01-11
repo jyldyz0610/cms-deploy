@@ -438,7 +438,7 @@ app.get('/home', function(request, response) {
     // If the user is logged in
     if (request.session.loggedin) {
         // Redirect to index.html on successful login
-        response.redirect('http://127.0.0.1:5500/ProjektCMS/kb-frontend/');
+        response.redirect('http://ec2-3-73-101-105.eu-central-1.compute.amazonaws.com/ProjektCMS/kb-frontend/');
     } else {
         // Not logged in
         response.send('Please login to view this page!');
@@ -520,7 +520,7 @@ app.post('/register', function(request, response) {
                         // Registration successful
                         // response.send('Registration successful! You can now log in.');
                                 // Redirect to index.html on successful login
-                        response.redirect('http://127.0.0.1:5500/ProjektCMS/kb-frontend/');
+                        response.redirect('http://ec2-3-73-101-105.eu-central-1.compute.amazonaws.com/ProjektCMS/kb-frontend/');
                     });
                 }
             });
@@ -537,5 +537,5 @@ app.post('/register', function(request, response) {
 
 // localhost listen port app 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://ec2-3-73-101-105.eu-central-1.compute.amazonaws.com:${port}`);
 });
